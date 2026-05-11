@@ -1,0 +1,26 @@
+{
+  "name": "hci_group_work",
+  "version": "1.0.0",
+  "description": "Card Manager",
+  "keywords": [
+    "card",
+    "organise",
+    "magic",
+    "gathering"
+  ],
+  "homepage": "https://github.com/redalert855/hci_group_work#readme",
+  "bugs": {
+    "url": "https://github.com/redalert855/hci_group_work/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/redalert855/hci_group_work.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  }
+}
