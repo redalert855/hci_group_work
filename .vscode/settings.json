@@ -35,14 +35,12 @@
         "**/.vscode": true,
         "**/.vscode/**": true
     },
+
     "accessibility.underlineLinks": true,
     "explorer.excludeGitIgnore": false,
     "editor.fontSize": 13,
     "eslint.format.enable": true,
     "eslint.codeActionsOnSave.mode": "all",
     "editor.wordWrap": "on",
-    "editor.wordWrapColumn": 100,
-    "[jsonc]": {
-        "editor.defaultFormatter": "vscode.json-language-features"
-    }
+    "editor.wordWrapColumn": 100
 }

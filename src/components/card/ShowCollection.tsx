@@ -29,7 +29,6 @@ export const ShowCollection = () => {
                                 />
                             ) : null}
                             <Spacer />
-                            <Text> {card?.id}</Text>
                             <Text> Card in Collection: {card?.amount}</Text>
                         </VStack>
                     )}
