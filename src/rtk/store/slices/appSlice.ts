@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { loadDataFromLocalStorage } from "../local-storage";
 
-type AppState = {
+export type AppState = {
     example: string;
     collection: {
         id: string;
@@ -18,9 +19,9 @@ type AppState = {
 
 const initialState: AppState = {
     example: "hello world",
-    collection: [],
+    collection: loadDataFromLocalStorage("collection") ?? [],
     selectedDeck: null,
-    decks: [],
+    decks: loadDataFromLocalStorage("decks") ?? [],
 };
 
 export const appSlice = createSlice({
