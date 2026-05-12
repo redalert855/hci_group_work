@@ -1,0 +1,12 @@
+{
+    "trailingComma": "all",
+    "tabWidth": 4,
+    "singleQuote": false,
+    "printWidth": 100,
+    "jsdocPrintWidth": 100,
+    "plugins": ["prettier-plugin-jsdoc"],
+    "bracketSpacing": true,
+    "singleAttributePerLine": true,
+    "bracketSameLine": false,
+    "objectWrap": "preserve"
+}

@@ -1,0 +1,45 @@
+{
+    "[svg]": {
+        "editor.defaultFormatter": "jock.svg"
+    },
+    "editor.codeActions.triggerOnFocusChange": true,
+    "editor.codeActionsOnSave": {
+        "source.addMissingImports.ts": "explicit",
+        "source.fixAll.eslint": "always",
+        "source.organizeImports": "never"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.formatOnType": true,
+    "editor.rulers": [100],
+    "eslint.lintTask.enable": true,
+    "files.autoSave": "onFocusChange",
+    "notebook.formatOnSave.enabled": true,
+    "prettier.configPath": ".prettierrc.json",
+    "editor.letterSpacing": -0.4,
+    "editor.lineHeight": 1.4,
+    "search.exclude": {
+        "**/node_modules": false,
+        "**/node_modules/**": true
+    },
+    "js/ts.tsserver.experimental.enableProjectDiagnostics": true,
+    "workbench.colorCustomizations": {
+        "editorRuler.foreground": "#0072bc"
+    },
+    "files.watcherExclude": {
+        "**/node_modules": true,
+        "**/node_modules/**": true,
+        "**/.git": true,
+        "**/.git/**": true,
+        "**/.vscode": true,
+        "**/.vscode/**": true
+    },
+    "accessibility.underlineLinks": true,
+    "explorer.excludeGitIgnore": false,
+    "editor.fontSize": 13,
+    "eslint.format.enable": true,
+    "eslint.codeActionsOnSave.mode": "all",
+    "editor.wordWrap": "on",
+    "editor.wordWrapColumn": 100
+}

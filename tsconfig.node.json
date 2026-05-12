@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+        "allowSyntheticDefaultImports": true,
+        "composite": true,
+        "module": "ESNext",
+        "moduleResolution": "bundler",
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "skipLibCheck": true,
+        "allowJs": true,
+        "outDir": "dist",
+        /* Linting */
+        "strict": true,
+        "strictNullChecks": true,
+        "strictFunctionTypes": false
+        /** 
+          "strictNullChecks": true,
+          "strictFunctionTypes": false,
+          because of yup library recommendation
+          https://github.com/jquense/yup?tab=readme-ov-file#schema-defaults:~:text=You%20must%20have%20the%20strictNullChecks%20compiler%20option%20enabled%20for%20type%20inference%20to%20work
+        */
+    },
+    "exclude": ["**/node_modules/**"],
+
+    "include": ["./vite.config.ts", "eslint.config.mjs", "./.storybook", "./storybook"]
+}
