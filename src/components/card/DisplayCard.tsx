@@ -1,11 +1,54 @@
 import { CardObject } from "@/rtk/scryfall/types/card/Card";
 import { CardFace } from "./CardFace";
-import { Button, ButtonProps, VStack } from "@chakra-ui/react";
+import { Button, ButtonProps, Dialog, VStack } from "@chakra-ui/react";
 import { useAppDispatch, useAppSelector } from "@/rtk/store/hooks";
 import { appSlice } from "@/rtk/store/slices/appSlice";
 import { cardEndpoints } from "@/rtk/scryfall/endpoints.ts/card.endpoints";
 import { skipToken } from "@reduxjs/toolkit/query";
+import { PropsWithChildren } from "react";
 
+export const ConfirmationModal = (
+    props: { message: string; onConfirm: () => void } & PropsWithChildren,
+) => {
+    return (
+        <Dialog.Root placement={"center"}>
+            <Dialog.Trigger asChild>{props.children}</Dialog.Trigger>
+            <Dialog.Backdrop />
+            <Dialog.Positioner>
+                <Dialog.Content>
+                    <Dialog.Header>
+                        <Dialog.Title>Are you sure?</Dialog.Title>
+                    </Dialog.Header>
+                    <Dialog.Body>
+                        <Dialog.Description>{props.message}</Dialog.Description>
+                    </Dialog.Body>
+                    <Dialog.Footer
+                        display={"flex"}
+                        flexDir={"row"}
+                        justifyContent={"center"}
+                    >
+                        <Dialog.CloseTrigger asChild>
+                            <Button>Cancel</Button>
+                        </Dialog.CloseTrigger>
+                        <Dialog.Context>
+                            {(context) => (
+                                <Button
+                                    colorScheme="red"
+                                    onClick={() => {
+                                        props.onConfirm();
+                                        context.setOpen(false);
+                                    }}
+                                >
+                                    Confirm
+                                </Button>
+                            )}
+                        </Dialog.Context>
+                    </Dialog.Footer>
+                </Dialog.Content>
+            </Dialog.Positioner>
+        </Dialog.Root>
+    );
+};
 export const AddCardToCollectionButton = ({
     card_id,
     ...props
@@ -38,15 +81,19 @@ export const RemoveCardFromCollectionButton = ({
     );
     if (!cardInCollection) return null;
     return (
-        <Button
-            textWrap={"wrap"}
-            onClick={() => {
+        <ConfirmationModal
+            message="Are you sure you want to remove 1x of this card from your collection?"
+            onConfirm={() => {
                 dispatch(appSlice.actions.removeCardFromCollection({ card_id }));
             }}
-            {...props}
         >
-            {"Remove 1x from Collection"}
-        </Button>
+            <Button
+                textWrap={"wrap"}
+                {...props}
+            >
+                {"Remove 1x from Collection"}
+            </Button>
+        </ConfirmationModal>
     );
 };
 

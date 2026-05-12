@@ -1,18 +1,13 @@
 import { VStack } from "@chakra-ui/react";
 import { DisplaySet } from "../components/set/DisplaySet";
 import { ShowCollection } from "@/components/card/ShowCollection";
+import { PageContainer } from "@/components/ui/Page";
 
 export const HomePage = () => {
     return (
-        <VStack
-            bg={"white"}
-            maxH={"100vh"}
-            p={4}
-            w={"full"}
-            overflow={"scroll"}
-        >
+        <PageContainer>
             <ShowCollection />
             <DisplaySet set_code={"uma"} />
-        </VStack>
+        </PageContainer>
     );
 };

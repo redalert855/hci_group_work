@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/rtk/store/hooks";
 import { HStack, SimpleGrid, Spacer, Text, VStack } from "@chakra-ui/react";
-import { FetchCard } from "./DisplayCard";
+import { FetchCard, RemoveCardFromCollectionButton } from "./DisplayCard";
 import { CardFace } from "./CardFace";
 
 export const ShowCollection = () => {
@@ -30,6 +30,7 @@ export const ShowCollection = () => {
                             ) : null}
                             <Spacer />
                             <Text> Card in Collection: {card?.amount}</Text>
+                            <RemoveCardFromCollectionButton card_id={card.id} />
                         </VStack>
                     )}
                 </FetchCard>

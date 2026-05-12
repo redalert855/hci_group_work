@@ -2,7 +2,7 @@ import { CardSearchSortingKeys } from "../CardSearchSortingKeys";
 import { DirSort } from "../DirSort";
 import { scryfallApi } from "../rootApi";
 import { CardObject } from "../types/card/Card";
-import { ListObject } from "../types/ListObject";
+import { CatalogObject, ListObject } from "../types/ListObject";
 import { UniqueModes } from "../UniqueModes";
 
 export type CardsResponse = unknown;
@@ -45,6 +45,11 @@ export const cardEndpoints = scryfallApi.injectEndpoints({
         getCardById: build.query<CardObject, { card_id: string }>({
             query: ({ card_id }) => ({
                 url: `/cards/${card_id}`,
+            }),
+        }),
+        cardNameAutocomplete: build.query<CatalogObject, { input_text: string }>({
+            query: ({ input_text }) => ({
+                url: `/cards/autocomplete?q=${encodeURIComponent(input_text)}`,
             }),
         }),
     }),

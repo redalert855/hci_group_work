@@ -2,15 +2,11 @@ import type { FlexProps } from "@chakra-ui/react";
 import type { ReactNode } from "react";
 import { Column } from "./Column";
 /**
- * @author Patryk Busler
- * @param props - Takes in flex props, bg is applied to the outer flex container
- * @returns
- * @component
- * Component for styling a page withing the app, has useful defaults
- * such as flex direction, padding, and max width and alignment.
- * It will align stuff to the center of the page, and contain it within a maximum width.
+ * Component for styling a page within the app, has useful defaults such as flex direction, padding,
+ * and max width and alignment. It will align stuff to the center of the page, and contain it within
+ * a maximum width.
  */
-export const PageLimitContainer = ({
+export const PageContainer = ({
     outerProps,
     innerProps,
     children,

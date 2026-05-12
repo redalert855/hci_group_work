@@ -6,3 +6,10 @@ export type ListObject<T> = {
     total_cards?: number | null;
     warnings?: string[] | null;
 };
+
+export type CatalogObject = {
+    object: "catalog";
+    data: string[];
+    total_values: number;
+    uri: string | null;
+};
