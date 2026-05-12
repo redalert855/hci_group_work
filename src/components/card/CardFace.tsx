@@ -1,8 +1,15 @@
 import { CardObject } from "@/rtk/scryfall/types/card/Card";
+import { ImageUris } from "@/rtk/scryfall/types/card/ImageUris";
 import { Image } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
 
-export const CardFace = ({ card }: { card: CardObject }) => {
+export const CardFace = ({
+    card,
+    cardSize,
+}: {
+    card: CardObject;
+    cardSize: keyof Pick<ImageUris, "small" | "normal" | "large">;
+}) => {
     const floatTilt = keyframes`
     0% {
         transform: translateY(0px) rotateZ(-1deg) rotateX(1deg);
@@ -30,7 +37,7 @@ export const CardFace = ({ card }: { card: CardObject }) => {
     const motionDuration = `10s`;
     return (
         <Image
-            src={card.image_uris?.normal}
+            src={card.image_uris?.[cardSize]}
             alt={card.name}
             aspectRatio={`${width}:${height}`}
             w={`${width * scale}rem`}

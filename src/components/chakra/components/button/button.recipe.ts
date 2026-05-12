@@ -6,10 +6,10 @@ export const buttonRecipe = defineRecipe({
     base: {
         "--base-size": "1rem",
         borderRadius: "2.5rem",
-        py: "0",
+        py: ".2rem",
         gap: ".5rem",
         fontWeight: "bold",
-        height: "auto",
+        height: "fit-content",
         _hover: {
             bg: "white",
             color: "black",

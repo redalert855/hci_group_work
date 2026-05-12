@@ -42,5 +42,10 @@ export const cardEndpoints = scryfallApi.injectEndpoints({
                 console.log("Fetching random card with args:", args);
             },
         }),
+        getCardById: build.query<CardObject, { card_id: string }>({
+            query: ({ card_id }) => ({
+                url: `/cards/${card_id}`,
+            }),
+        }),
     }),
 });
