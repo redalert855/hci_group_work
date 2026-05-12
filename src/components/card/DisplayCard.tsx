@@ -52,7 +52,7 @@ export const ConfirmationModal = (
 export const AddCardToCollectionButton = ({
     card_id,
     ...props
-}: { card_id: string } & ButtonProps) => {
+}: { card_id: string | undefined } & ButtonProps) => {
     const dispatch = useAppDispatch();
     const cardInCollection = useAppSelector((state) =>
         state.app.collection.find((card) => card.id === card_id),
@@ -61,7 +61,9 @@ export const AddCardToCollectionButton = ({
         <Button
             textWrap={"wrap"}
             onClick={() => {
-                dispatch(appSlice.actions.addCardToCollection({ card_id }));
+                if (card_id) {
+                    dispatch(appSlice.actions.addCardToCollection({ card_id }));
+                }
             }}
             {...props}
         >
@@ -74,7 +76,7 @@ export const AddCardToCollectionButton = ({
 export const RemoveCardFromCollectionButton = ({
     card_id,
     ...props
-}: { card_id: string } & ButtonProps) => {
+}: { card_id: string | undefined } & ButtonProps) => {
     const dispatch = useAppDispatch();
     const cardInCollection = useAppSelector((state) =>
         state.app.collection.find((card) => card.id === card_id),
@@ -84,7 +86,9 @@ export const RemoveCardFromCollectionButton = ({
         <ConfirmationModal
             message="Are you sure you want to remove 1x of this card from your collection?"
             onConfirm={() => {
-                dispatch(appSlice.actions.removeCardFromCollection({ card_id }));
+                if (card_id) {
+                    dispatch(appSlice.actions.removeCardFromCollection({ card_id }));
+                }
             }}
         >
             <Button
@@ -97,13 +101,15 @@ export const RemoveCardFromCollectionButton = ({
     );
 };
 
-export const DisplayCard = ({ card }: { card: CardObject }) => {
-    if (card.card_faces) {
+export const DisplayCard = ({ card }: { card: CardObject | undefined }) => {
+    if (card?.card_faces) {
         console.log("Card which has faces:", card);
-        card.card_faces?.map((face) => console.log("Card has face:", face));
+        card?.card_faces?.map((face) => console.log("Card has face:", face));
     }
     const dispatch = useAppDispatch();
-
+    if (!card) {
+        return <VStack>Card not found</VStack>;
+    }
     return (
         <VStack>
             <CardFace

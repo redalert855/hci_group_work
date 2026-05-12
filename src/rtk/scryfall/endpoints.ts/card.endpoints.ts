@@ -52,5 +52,10 @@ export const cardEndpoints = scryfallApi.injectEndpoints({
                 url: `/cards/autocomplete?q=${encodeURIComponent(input_text)}`,
             }),
         }),
+        getCardByName: build.query<CardObject, { exact: boolean; name: string }>({
+            query: ({ exact, name }) => ({
+                url: `/cards/named?${exact ? "exact" : "fuzzy"}=${encodeURIComponent(name)}`,
+            }),
+        }),
     }),
 });

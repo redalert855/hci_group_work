@@ -36,7 +36,7 @@ export const CardNameInput = (props: { onSelectName: (name: string) => void }) =
             }}
             w={"20rem"}
         >
-            <Combobox.Label>Card Name</Combobox.Label>
+            <Combobox.Label>Enter Card Name</Combobox.Label>
             <Combobox.Control>
                 <Combobox.Input />
                 <Combobox.IndicatorGroup>

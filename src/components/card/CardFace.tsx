@@ -7,7 +7,7 @@ export const CardFace = ({
     card,
     cardSize,
 }: {
-    card: CardObject;
+    card: CardObject | undefined;
     cardSize: keyof Pick<ImageUris, "small" | "normal" | "large">;
 }) => {
     const floatTilt = keyframes`
@@ -35,6 +35,9 @@ export const CardFace = ({
     const scale = 0.25;
     /** Animation test */
     const motionDuration = `10s`;
+    if (!card) {
+        return null;
+    }
     return (
         <Image
             src={card.image_uris?.[cardSize]}
