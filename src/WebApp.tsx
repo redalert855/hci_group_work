@@ -1,35 +1,141 @@
-import { Flex, Text } from "@chakra-ui/react";
-import { Routes, Route } from "react-router";
-import { HomePage } from "./pages/home.page";
-import { CollectionPage } from "./pages/collection.page";
+import { Flex, Heading, Text } from "@chakra-ui/react";
+import { Routes, Route, Navigate, useParams } from "react-router";
+import { HomePage } from "./pages/page.home";
+import { VaultPage } from "./pages/page.vault";
 import { Column } from "./components/ui/Column";
-export const WebApp = () => (
-    <Column
-        bottom={0}
-        left={0}
-        maxW={"100vw"}
-        overflow={"auto"}
-        pb={"env(safe-area-inset-bottom)"}
-        pos={"fixed"}
-        maxH={"100vh"}
-        right={0}
-        top={0}
-        bg={"#f0f0f0"}
-        gap={"1rem"}
-    >
-        <Routes>
-            <Route
-                element={<HomePage />}
+import { PropsWithChildren } from "react";
+import { Row } from "./components/ui/Row";
+import { NavLink } from "react-router";
+import { cardEndpoints } from "./rtk/scryfall/endpoints.ts/card.endpoints";
+import { skipToken } from "@reduxjs/toolkit/query";
+import { CardFace } from "./components/card/components/CardFace";
+import { CardAmountControl } from "./components/card/buttons/CardAmountControl";
+import { PageContainer } from "./components/ui/PageContainer";
+import { AppWindow } from "./components/ui/AppWindow";
+import { DeckCardAdder } from "./components/deck/DeckCardAdder";
+import { CardContextProvider } from "./components/card/hooks/CardContext";
+import { DecksPage } from "./pages/page.decks";
+import { DeckPage } from "./pages/page.deck";
+import { CardAmountInDeck } from "./CardAmountInDeck";
+import { WishlistPage } from "./WishlistPage";
+
+export const AppPath = ["/home", "/vault", "/decks", "/wishlist"];
+export type AppPath = (typeof AppPath)[number];
+export const AppNavigator = (props: PropsWithChildren) => {
+    const NavButton = ({ path, label }: { path: AppPath; label: string }) => (
+        <NavLink to={path}>
+            {(a) => (
+                <Flex
+                    {...(a.isActive && {
+                        borderBottomColor: "red",
+                        borderBottomWidth: ".2rem",
+                    })}
+                >
+                    <Heading>{label}</Heading>
+                </Flex>
+            )}
+        </NavLink>
+    );
+    return (
+        <Row
+            py={"1rem"}
+            px={"2rem"}
+            gap={"1rem"}
+            w={"full"}
+            justify={"space-between"}
+            borderBottom={".25rem solid red"}
+        >
+            <NavButton
                 path={"/home"}
+                label={"Home"}
             />
-            <Route
-                element={<CollectionPage />}
-                path={"/collection"}
+            <NavButton
+                path={"/vault"}
+                label={"Vault"}
             />
-            <Route
-                element={<Text>Page Not Found</Text>}
-                path={"*"}
+            <NavButton
+                path={"/decks"}
+                label={"Decks"}
             />
-        </Routes>
-    </Column>
+            <NavButton
+                path={"/wishlist"}
+                label={"Wishlist"}
+            />
+        </Row>
+    );
+};
+
+export const CardViewPage = () => {
+    const { card_id } = useParams();
+    const card = cardEndpoints.useGetCardByIdQuery(card_id ? { card_id } : skipToken);
+    return (
+        <CardContextProvider
+            card_id={card_id}
+            card={undefined}
+        >
+            <Column
+                gap={"1rem"}
+                p={"1rem"}
+            >
+                <Heading>{"Card View"}</Heading>
+                <Text>{card_id}</Text>
+                <Text>{card.data?.name}</Text>
+                <Row
+                    align={"center"}
+                    justify={"center"}
+                    borderRadius={"1rem"}
+                    gap={"1rem"}
+                    fontWeight={"bolder"}
+                >
+                    <CardFace imageToUse="normal" />
+                    <Column gap={"inherit"}>
+                        <CardAmountControl />
+                    </Column>
+                </Row>
+            </Column>
+        </CardContextProvider>
+    );
+};
+
+export const WebApp = () => (
+    <AppWindow>
+        <PageContainer>
+            <Heading> {"Deckadance"}</Heading>
+            <AppNavigator />
+            <Routes>
+                <Route
+                    element={<Navigate to="/home" />}
+                    path="*"
+                />
+                <Route
+                    path="card/:card_id"
+                    element={<CardViewPage />}
+                />
+                <Route
+                    path="/home"
+                    element={<HomePage />}
+                />
+                <Route
+                    path="/import"
+                    element={<DeckCardAdder />}
+                />
+                <Route
+                    element={<VaultPage />}
+                    path={"/vault"}
+                />
+                <Route
+                    element={<DecksPage />}
+                    path={"/decks"}
+                />
+                <Route
+                    element={<DeckPage />}
+                    path={"/deck/:deck_id"}
+                />
+                <Route
+                    element={<WishlistPage />}
+                    path={"/wishlist"}
+                />
+            </Routes>
+        </PageContainer>
+    </AppWindow>
 );

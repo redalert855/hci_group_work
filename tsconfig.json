@@ -3,34 +3,24 @@
         "allowSyntheticDefaultImports": true,
         "isolatedModules": true,
         "jsx": "react-jsx",
-        "lib": [
-            "ESNext",
-            "DOM",
-            "DOM.Iterable"
-        ],
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
         "module": "ESNext",
         "moduleResolution": "bundler",
         "noFallthroughCasesInSwitch": true,
         "paths": {
-            "@/*": [
-                "./src/*"
-            ] // Allows for absolute imports from the src directory using the @ alias
+            "@/*": ["./src/*"] // Allows for absolute imports from the src directory using the @ alias
         },
         "resolveJsonModule": true,
         "skipLibCheck": true,
-        "noEmit": false,
+        "noEmit": true,
         /* Linting */
         "strict": true,
         "strictNullChecks": true,
         "target": "ESNext",
-        "types": [
-            "vite/client"
-        ],
+        "types": ["vite/client"],
         "rootDir": "."
     },
-    "exclude": [
-        "**/node_modules/**"
-    ],
+    "exclude": ["**/node_modules/**"],
     "include": [
         "./src/**/*.ts",
         "./src/**/*.d.ts",

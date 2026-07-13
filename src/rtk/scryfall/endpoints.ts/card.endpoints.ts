@@ -45,6 +45,10 @@ export const cardEndpoints = scryfallApi.injectEndpoints({
         getCardById: build.query<CardObject, { card_id: string }>({
             query: ({ card_id }) => ({
                 url: `/cards/${card_id}`,
+                rateLimit: {
+                    maxRequests: 10,
+                    perMilliseconds: 1000,
+                },
             }),
         }),
         cardNameAutocomplete: build.query<CatalogObject, { input_text: string }>({

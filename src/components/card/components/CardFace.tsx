@@ -1,15 +1,14 @@
-import { CardObject } from "@/rtk/scryfall/types/card/Card";
 import { ImageUris } from "@/rtk/scryfall/types/card/ImageUris";
 import { Image } from "@chakra-ui/react";
 import { keyframes } from "@emotion/react";
+import { useCard } from "../hooks/useCard";
 
 export const CardFace = ({
-    card,
-    cardSize,
+    imageToUse,
 }: {
-    card: CardObject | undefined;
-    cardSize: keyof Pick<ImageUris, "small" | "normal" | "large">;
+    imageToUse: keyof Pick<ImageUris, "small" | "normal" | "large">;
 }) => {
+    const { card } = useCard();
     const floatTilt = keyframes`
     0% {
         transform: translateY(0px) rotateZ(-1deg) rotateX(1deg);
@@ -35,15 +34,19 @@ export const CardFace = ({
     const scale = 0.25;
     /** Animation test */
     const motionDuration = `10s`;
+    /** The calculated width and height in rem */
+    const calculatedWidth = width * scale;
+    const calculatedHeight = height * scale;
     if (!card) {
         return null;
     }
     return (
         <Image
-            src={card.image_uris?.[cardSize]}
+            src={card.image_uris?.[imageToUse]}
             alt={card.name}
             aspectRatio={`${width}:${height}`}
-            w={`${width * scale}rem`}
+            minW={`${calculatedWidth}rem`}
+            w={`${calculatedWidth}rem`}
             borderRadius={`${radius * scale}rem`}
             filter={"drop-shadow(0 8px 10px rgba(0, 0, 0, 0.18))"}
             //animation={`${floatTilt} ${motionDuration} ease-in-out infinite`}

@@ -3,7 +3,6 @@ import { AppState } from "./slices/appSlice";
 type LocalStorage = {
     user_token?: string;
     decks?: AppState["decks"];
-    collection?: AppState["collection"];
 };
 export const loadDataFromLocalStorage = <T extends keyof LocalStorage>(
     address: T,
@@ -18,6 +17,7 @@ export const loadDataFromLocalStorage = <T extends keyof LocalStorage>(
         }
         const parsedValue = JSON.parse(value) as LocalStorage[T];
         console.log(`[${address}]`, "found:", parsedValue);
+
         return parsedValue;
     } catch (error) {
         console.error(error);

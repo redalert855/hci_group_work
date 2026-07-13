@@ -8,6 +8,7 @@ export const inputRecipe = defineRecipe({
         colorPalette: "primary",
         borderColor: "secondary",
         borderRadius: "full",
+        bg: "white",
         color: "primary",
         fontWeight: "normal",
         boxShadow: "md",
